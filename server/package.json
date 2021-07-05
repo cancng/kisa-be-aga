@@ -8,6 +8,11 @@
   "private": false,
   "scripts": {
     "dev": "ts-node-dev index.ts",
+    "start": "node dist/index",
+    "clean": "rm -rf dist",
+    "build": "npm -s run clean && npm -s run generate && tsc -p .",
+    "generate": "prisma generate",
+    "dbpush": "prisma db push",
     "test": "jest"
   },
   "devDependencies": {

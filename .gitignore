@@ -8,3 +8,7 @@ yarn-debug.log*
 yarn-error.log*
 yarn.lock
 .nyc_output
+.vercel
+workspace.code-workspace
+dist
+ecosystem.config.js

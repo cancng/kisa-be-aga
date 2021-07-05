@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { GetServerSideProps } from 'next';
 import {
   Box,
   Text,
@@ -10,11 +11,11 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { FiLink } from 'react-icons/fi';
+import * as yup from 'yup';
 import Template from '../components/Template';
 
 import axiosInstance from '../utils/api';
 import ShortenedUrl from '../components/ShortenedUrl';
-import { GetServerSideProps } from 'next';
 
 type Props = { host: string };
 const Homepage: React.FC<Props> = ({ host }) => {
@@ -22,14 +23,19 @@ const Homepage: React.FC<Props> = ({ host }) => {
   const [shortId, setShortId] = useState<string>('');
   const toast = useToast();
 
+  const schema = yup.object().shape({
+    url: yup.string().url().required(),
+  });
+
   const shortenUrl = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
+      schema.validateSync({ url });
       const res = await axiosInstance.post('/url', { url });
       setShortId(res.data.shortId);
     } catch (error) {
-      console.log('catch err:: ', error.message);
+      // console.log('catch err:: ', error.message);
       return toast({
         title: 'Hata',
         description: error.message,
