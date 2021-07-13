@@ -24,6 +24,6 @@ const buildFastify = () => {
   return fastify;
 };
 
-buildFastify().listen(3001, '0.0.0.0');
+buildFastify().listen(6000, '0.0.0.0');
 
 export default buildFastify;
