@@ -5,6 +5,9 @@ module.exports = {
     {
       name: 'kisa be aga server',
       script: 'npm run start',
+      env: {
+        DATABASE_URL: process.env.DATABASE_URL,
+      },
     },
   ],
 
